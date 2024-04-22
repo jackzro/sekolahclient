@@ -1,0 +1,43 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export -o build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
+    "@react-pdf/renderer": "^2.1.1",
+    "axios": "^0.26.1",
+    "daisyui": "^2.15.0",
+    "iconv-lite": "^0.6.3",
+    "match-sorter": "^6.3.1",
+    "next": "12.1.5",
+    "next-auth": "^4.3.2",
+    "nookies": "^2.5.2",
+    "react": "18.0.0",
+    "react-calendar": "^3.7.0",
+    "react-date-range": "^1.4.0",
+    "react-datepicker": "^4.8.0",
+    "react-dom": "18.0.0",
+    "react-fns": "^1.4.0",
+    "react-hook-form": "^7.30.0",
+    "react-icons": "^4.3.1",
+    "react-number-format": "^4.9.3",
+    "react-query": "^3.39.0",
+    "react-table": "^7.7.0",
+    "react-toastify": "^8.2.0",
+    "xlsx": "^0.18.5",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.4",
+    "eslint": "8.13.0",
+    "eslint-config-next": "12.1.5",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.24"
+  }
+}
