@@ -146,7 +146,7 @@ function Income() {
             {Object.keys(other).map((item) => {
               return (
                 <p>
-                  Jumlah {item} : Rp {numberWithCommas(other[item])}
+                  {item} : Rp {numberWithCommas(other[item])}
                 </p>
               );
             })}
@@ -156,7 +156,7 @@ function Income() {
             {Object.keys(iuran).map((item) => {
               return (
                 <p>
-                  Jumlah {item} : Rp {numberWithCommas(iuran[item])}
+                  {item} : Rp {numberWithCommas(iuran[item])}
                 </p>
               );
             })}
@@ -177,7 +177,7 @@ function Income() {
                       {Object.keys(category[item]).map((iuran) => {
                         return (
                           <p>
-                            Jumlah {iuran} : Rp{" "}
+                            {iuran} : Rp{" "}
                             {numberWithCommas(category[item][iuran])}{" "}
                           </p>
                         );
@@ -188,7 +188,7 @@ function Income() {
                       {Object.keys(caraBayar[item]).map((iuran) => {
                         return (
                           <p>
-                            Jumlah {iuran} : Rp{" "}
+                            {iuran} : Rp{" "}
                             {numberWithCommas(caraBayar[item][iuran])}{" "}
                           </p>
                         );
