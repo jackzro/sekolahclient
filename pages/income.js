@@ -47,6 +47,21 @@ function Income() {
   const reTotal = useCallback(() => {
     let total = 0;
     let other = {};
+
+    let iuran = {};
+    let category = {
+      "KB/TK MARIA YACHINTA": {},
+      "SD MARIA FRANSISKA": {},
+      "SMP PAX ECCLESIA": {},
+      "SMA PAX PATRIAE": {},
+    };
+
+    let caraBayar = {
+      "KB/TK MARIA YACHINTA": {},
+      "SD MARIA FRANSISKA": {},
+      "SMP PAX ECCLESIA": {},
+      "SMA PAX PATRIAE": {},
+    };
     dataIncome.map((item) => {
       if (other[item.caraBayar] === undefined) {
         other[item.caraBayar] = item.jumlahTagihan;
@@ -54,11 +69,157 @@ function Income() {
         other[item.caraBayar] += item.jumlahTagihan;
       }
 
+      if (iuran[item.iuran] === undefined) {
+        iuran[item.iuran] = item.jumlahTagihan;
+      } else if (iuran[item.iuran] !== undefined) {
+        iuran[item.iuran] += item.jumlahTagihan;
+      }
+
+      if (item.unit === "KB/TK MARIA YACHINTA") {
+        if (category["KB/TK MARIA YACHINTA"][item.iuran] === undefined) {
+          category["KB/TK MARIA YACHINTA"][item.iuran] = item.jumlahTagihan;
+        } else if (category["KB/TK MARIA YACHINTA"][item.iuran] !== undefined) {
+          category["KB/TK MARIA YACHINTA"][item.iuran] += item.jumlahTagihan;
+        }
+
+        if (caraBayar["KB/TK MARIA YACHINTA"][item.caraBayar] === undefined) {
+          caraBayar["KB/TK MARIA YACHINTA"][item.caraBayar] =
+            item.jumlahTagihan;
+        } else if (
+          caraBayar["KB/TK MARIA YACHINTA"][item.caraBayar] !== undefined
+        ) {
+          caraBayar["KB/TK MARIA YACHINTA"][item.caraBayar] +=
+            item.jumlahTagihan;
+        }
+      } else if (item.unit === "SD MARIA FRANSISKA") {
+        if (category["SD MARIA FRANSISKA"][item.iuran] === undefined) {
+          category["SD MARIA FRANSISKA"][item.iuran] = item.jumlahTagihan;
+        } else if (category["SD MARIA FRANSISKA"][item.iuran] !== undefined) {
+          category["SD MARIA FRANSISKA"][item.iuran] += item.jumlahTagihan;
+        }
+
+        if (caraBayar["SD MARIA FRANSISKA"][item.caraBayar] === undefined) {
+          caraBayar["SD MARIA FRANSISKA"][item.caraBayar] = item.jumlahTagihan;
+        } else if (
+          caraBayar["SD MARIA FRANSISKA"][item.caraBayar] !== undefined
+        ) {
+          caraBayar["SD MARIA FRANSISKA"][item.caraBayar] += item.jumlahTagihan;
+        }
+      } else if (item.unit === "SMP PAX ECCLESIA") {
+        if (category["SMP PAX ECCLESIA"][item.iuran] === undefined) {
+          category["SMP PAX ECCLESIA"][item.iuran] = item.jumlahTagihan;
+        } else if (category["SMP PAX ECCLESIA"][item.iuran] !== undefined) {
+          category["SMP PAX ECCLESIA"][item.iuran] += item.jumlahTagihan;
+        }
+        if (caraBayar["SMP PAX ECCLESIA"][item.caraBayar] === undefined) {
+          caraBayar["SMP PAX ECCLESIA"][item.caraBayar] = item.jumlahTagihan;
+        } else if (
+          caraBayar["SMP PAX ECCLESIA"][item.caraBayar] !== undefined
+        ) {
+          caraBayar["SMP PAX ECCLESIA"][item.caraBayar] += item.jumlahTagihan;
+        }
+      } else if (item.unit === "SMA PAX PATRIAE") {
+        if (category["SMA PAX PATRIAE"][item.iuran] === undefined) {
+          category["SMA PAX PATRIAE"][item.iuran] = item.jumlahTagihan;
+        } else if (category["SMA PAX PATRIAE"][item.iuran] !== undefined) {
+          category["SMA PAX PATRIAE"][item.iuran] += item.jumlahTagihan;
+        }
+
+        if (caraBayar["SMA PAX PATRIAE"][item.caraBayar] === undefined) {
+          caraBayar["SMA PAX PATRIAE"][item.caraBayar] = item.jumlahTagihan;
+        } else if (caraBayar["SMA PAX PATRIAE"][item.caraBayar] !== undefined) {
+          caraBayar["SMA PAX PATRIAE"][item.caraBayar] += item.jumlahTagihan;
+        }
+      }
+
       total += Number(item.jumlahTagihan);
     });
+
     return (
-      <div className="items-center justify-center p-4 mt-6 text-center text-white rounded-lg bg-info">
-        <p>Jumlah Uang: Rp {numberWithCommas(total)}</p>
+      <div className="p-4 mt-6 space-y-3 text-white rounded-lg ">
+        <div className="w-full p-4 mb-10 text-xl text-center text-black bg-white border-4 border-b-8 border-black">
+          <p>Jumlah Uang: Rp {numberWithCommas(total)}</p>
+        </div>
+
+        <div className="flex justify-center">
+          <div className="w-full p-4 mb-10 text-lg text-center text-black bg-white border-4 border-b-8 border-black">
+            {Object.keys(other).map((item) => {
+              return (
+                <p>
+                  Jumlah {item} : Rp {numberWithCommas(other[item])}
+                </p>
+              );
+            })}
+          </div>
+
+          <div className="w-full p-4 mb-10 text-lg text-center text-black bg-white border-4 border-b-8 border-black">
+            {Object.keys(iuran).map((item) => {
+              return (
+                <p>
+                  Jumlah {item} : Rp {numberWithCommas(iuran[item])}
+                </p>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="w-full p-4 mb-10 text-lg text-center text-black bg-white border-4 border-b-8 border-black">
+          <div>
+            {Object.keys(category).map((item) => {
+              return (
+                <div className="border-2 border-black">
+                  <span>
+                    <p>{item}</p>
+                  </span>
+
+                  <div className="flex items-center justify-between p-2">
+                    <span>
+                      {Object.keys(category[item]).map((iuran) => {
+                        return (
+                          <p>
+                            Jumlah {iuran} : Rp{" "}
+                            {numberWithCommas(category[item][iuran])}{" "}
+                          </p>
+                        );
+                      })}
+                    </span>
+
+                    <span>
+                      {Object.keys(caraBayar[item]).map((iuran) => {
+                        return (
+                          <p>
+                            Jumlah {iuran} : Rp{" "}
+                            {numberWithCommas(caraBayar[item][iuran])}{" "}
+                          </p>
+                        );
+                      })}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }, [dataIncome]);
+
+  const reTotalIuran = useCallback(() => {
+    let total = 0;
+    let other = {};
+    dataIncome.map((item) => {
+      if (other[item.iuran] === undefined) {
+        other[item.iuran] = item.jumlahTagihan;
+      } else if (other[item.iuran] !== undefined) {
+        other[item.iuran] += item.jumlahTagihan;
+      }
+
+      total += Number(item.jumlahTagihan);
+    });
+
+    return (
+      <div className="items-center justify-center p-4 mt-6 text-center text-white bg-black rounded-lg">
+        {/* <p>Jumlah Uang: Rp {numberWithCommas(total)}</p> */}
         {Object.keys(other).map((item) => {
           return (
             <p>
@@ -95,7 +256,7 @@ function Income() {
           </a>
         ) : null} */}
       </div>
-      {dataIncome.length !== 0 ? reTotal() : null}
+      {dataIncome.length !== 0 ? <div className="">{reTotal()}</div> : null}
 
       {loading === false ? <TableIncome data={dataIncome} /> : <Loading />}
     </Dashboard>
