@@ -68,6 +68,7 @@ function HeaderInvoice({ data }) {
     const finalNumber =
       Math.round((numberofDate + numberofGrade + numberofSiswaID) / 3) +
       (data.length - 1);
+    console.log(data[0].student.id.charAt(4));
     return finalNumber;
   };
   return (

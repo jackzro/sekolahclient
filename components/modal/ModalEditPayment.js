@@ -15,7 +15,7 @@ const MODAL_STYLES = {
   zIndex: 1000,
   borderRadius: 6,
   width: "1000px",
-  height: "60%",
+  height: "70%",
 };
 
 const OVERLAY_STYLES = {
@@ -40,9 +40,10 @@ export function ModalEditPayment({ open, onClose, data, handleMutate }) {
 
   const onHandleSubmit = (amount) => {
     data.amount = amount;
+
     editPayment(data, {
       onSuccess: async (data) => {
-        toast.success("Jumlah Tagihan / Denda sudah diganti!!!");
+        toast.success("Jumlah Tagihan / Denda / Bayar sudah diganti!!!");
         onClose();
       },
       onError: async (data) => {
@@ -72,6 +73,9 @@ export function ModalEditPayment({ open, onClose, data, handleMutate }) {
             <p className="text-xl text-black">Nama</p>
             <p className="text-xl text-black">Iuran</p>
             <p className="text-xl text-black">Jumlah Tagihan</p>
+            <p className="text-xl text-black">
+              Jumlah Tagihan yang sudah dibayar
+            </p>
             <p className="text-xl text-black">Jumlah Denda</p>
           </div>
           <div>
@@ -80,6 +84,13 @@ export function ModalEditPayment({ open, onClose, data, handleMutate }) {
             <p className="text-xl text-black">: {data["iuran"]}</p>
             <p className="text-xl text-black">
               : Rp. {numberWithCommas(data["jumlahTagihan"])}
+            </p>
+
+            <p className="text-xl text-black">
+              : Rp.
+              {data["jumlahBayar"] === undefined
+                ? " 0"
+                : numberWithCommas(data["jumlahBayar"])}
             </p>
             <p className="text-xl text-black">
               : Rp. {numberWithCommas(data["jumlahDenda"])}
@@ -129,6 +140,30 @@ export function ModalEditPayment({ open, onClose, data, handleMutate }) {
               )}
             />
           </div>
+          {data?.iuran !== "Uang Sekolah" && (
+            <div className="mb-2">
+              <label className="text-lg text-black">
+                Ubah Jumlah Bayar menjadi :{" "}
+              </label>
+              <Controller
+                control={control}
+                name="jumlahBayar"
+                render={({ field: { onChange, onBlur, value, name, ref } }) => (
+                  <NumberFormat
+                    className="p-1 text-black border-2 border-black rounded-lg"
+                    thousandSeparator
+                    // {...field}
+                    prefix="Rp "
+                    onValueChange={(values) => {
+                      onChange(values.value);
+                      return values.value;
+                    }}
+                    value={value}
+                  />
+                )}
+              />
+            </div>
+          )}
           <button
             type="submit"
             className="w-[100%] bg-blue-500 p-2 mt-4 rounded-lg text-white text-xl"

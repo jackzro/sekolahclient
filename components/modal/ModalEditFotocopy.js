@@ -48,17 +48,19 @@ export function ModalEditFotocopy({
   if (!open) return null;
 
   const onHandleSubmit = (inputData) => {
-    if (
-      new Date(inputData.tanggalFotocopy).toLocaleDateString() ===
-      new Date(data.tanggalFotocopy).toLocaleDateString()
-    ) {
-      inputData.tanggalFotocopy = new Date(
-        data.tanggalFotocopy
-      ).toLocaleDateString();
-    }
+    // if (
+    //   new Date(inputData.tanggalFotocopy).toLocaleDateString() ===
+    //   new Date(data.tanggalFotocopy).toLocaleDateString()
+    // ) {
+    //   inputData.tanggalFotocopy = new Date(
+    //     data.tanggalFotocopy
+    //   ).toLocaleDateString();
+    // }
 
     inputData.id = data.id;
-
+    inputData.tanggalFotocopy = new Date(
+      data.tanggalFotocopy
+    ).toLocaleDateString();
     editFotocopy(inputData, {
       onSuccess: async (data) => {
         toast.success("Fotocopy sudah diganti!!!");
@@ -90,7 +92,7 @@ export function ModalEditFotocopy({
           onSubmit={handleSubmit(onHandleSubmit)}
           className="w-full space-y-6"
         >
-          <section className="w-full mt-2 ">
+          {/* <section className="w-full mt-2 ">
             <label className="mb-4 text-black">Tanggal Fotocopy :</label>
             <Controller
               control={control}
@@ -108,7 +110,7 @@ export function ModalEditFotocopy({
                 />
               )}
             />
-          </section>
+          </section> */}
 
           <section className="mt-2">
             <label className="mb-4 text-black">Jumlah Fotocopy :</label>

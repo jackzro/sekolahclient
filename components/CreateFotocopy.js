@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -11,16 +11,18 @@ import { useCreateFotocopy } from "@services/fotocopy";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useQueryClient } from "react-query";
+import { AuthContext } from "@context/AuthContext";
 
 const schema = yup
   .object({
-    tanggalFotocopy: yup.string().required(),
+    // tanggalFotocopy: yup.string().required(),
     jumlahFotocopy: yup.string().required(),
     keperluan: yup.string().required(),
   })
   .required();
 
 function CreateFotocopy({ onClose, refetch }) {
+  const { user } = useContext(AuthContext);
   const router = useRouter();
   const { mutate: createFotocopy } = useCreateFotocopy();
   const queryClient = useQueryClient();
@@ -35,7 +37,10 @@ function CreateFotocopy({ onClose, refetch }) {
     resolver: yupResolver(schema),
   });
 
-  const onHandleSubmit = async (data) => {
+  const onHandleSubmit = async (data, e) => {
+    e.preventDefault();
+    data.tanggalFotocopy = new Date();
+    data.userId = user.sub;
     createFotocopy(data, {
       onSuccess: (yolo) => {
         queryClient.invalidateQueries(["fotocopy"]);
@@ -63,7 +68,7 @@ function CreateFotocopy({ onClose, refetch }) {
         </span>
       </span>
 
-      <section className="w-full mt-2 ">
+      {/* <section className="w-full mt-2 ">
         <label className="mb-4 text-black">Tanggal Fotocopy :</label>
         <Controller
           control={control}
@@ -79,7 +84,7 @@ function CreateFotocopy({ onClose, refetch }) {
             />
           )}
         />
-      </section>
+      </section> */}
 
       <section className="mt-2">
         <label className="mb-4 text-black">Jumlah Fotocopy :</label>
@@ -105,7 +110,10 @@ function CreateFotocopy({ onClose, refetch }) {
 
       <Input label="Keperluan" value="keperluan" register={register} />
 
-      <button className="w-full p-4 text-white bg-blue-500 rounded-lg">
+      <button
+        type="submit"
+        className="w-full p-4 text-white bg-blue-500 rounded-lg"
+      >
         Submit
       </button>
     </form>

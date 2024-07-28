@@ -50,7 +50,6 @@ export const useCreateFotocopy = () => useMutation(createFotocopy);
 export const deleteFotocopy = (id) =>
   postRequest(`/fotocopy/${id}`, null, false, "delete");
 export const useDeleteFotocopy = () => useMutation(deleteFotocopy);
-
 export const editFotocopy = (body) =>
   postRequest(`/fotocopy/${body.id}`, body, false, "put");
 

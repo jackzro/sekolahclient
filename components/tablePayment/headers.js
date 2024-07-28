@@ -44,6 +44,15 @@ export const Columns = (setShowEdit, setDataTempEdit, role) => {
       Header: "Cara Bayar",
       accessor: "caraBayar",
     },
+
+    {
+      Header: "Jumlah Bayar",
+      accessor: "jumlahBayar",
+    },
+    {
+      Header: "Edit By",
+      accessor: "userBayar",
+    },
     {
       Header: "Tanggal Bayar",
       accessor: "tanggalBayar",

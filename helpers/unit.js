@@ -37,6 +37,10 @@ export const typePembayaran = [
     id: 3,
     name: "Transfer",
   },
+  {
+    id: 3,
+    name: "BCA VA",
+  },
 ];
 
 export const typeUnit = [

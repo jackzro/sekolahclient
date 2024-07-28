@@ -46,22 +46,22 @@ function TableFotocopy({
     usePagination,
     useRowSelect,
     (hooks) => {
-      if (user.role === "admin") {
-        hooks.visibleColumns.push((columns) => {
-          return [
-            {
-              id: "selection",
-              Header: ({ getToggleAllRowsSelectedProps }) => (
-                <Checkbox {...getToggleAllRowsSelectedProps()} />
-              ),
-              Cell: ({ row }) => (
-                <Checkbox {...row.getToggleRowSelectedProps()} />
-              ),
-            },
-            ...columns,
-          ];
-        });
-      }
+      // if (user.role === "admin") {
+      hooks.visibleColumns.push((columns) => {
+        return [
+          {
+            id: "selection",
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            ),
+            Cell: ({ row }) => (
+              <Checkbox {...row.getToggleRowSelectedProps()} />
+            ),
+          },
+          ...columns,
+        ];
+      });
+      // }
     }
   );
 
