@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
 });
 
 function Laporan({ data, jenis }) {
+  console.log(data, jenis);
   return (
     // <PDFViewer style={styles.viewer}>
     <PdfDocument>

@@ -17,7 +17,7 @@ import { useGetGakBayar } from "@services/payment";
 function LaporanView({ user }) {
   const { mutate: generateLaporan } = useLaporan();
   const { mutate: generateLaporanUnit } = useLaporanUnit();
-  const { mutate: generateLaporanGakBayar } = useLaporanGakbayar();
+  // const { mutate: generateLaporanGakBayar } = useLaporanGakbayar();
   const [unit, setUnit] = useState([]);
   const [jenis, setJenis] = useState("");
   const [laporan, setLaporan] = useState([]);
@@ -26,7 +26,7 @@ function LaporanView({ user }) {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-
+  console.log("coba");
   useEffect(() => {
     if (user.role !== "admin") {
       unitHandler(chooseByUnit(user.role));
@@ -54,7 +54,7 @@ function LaporanView({ user }) {
 
   const onHandleSubmit = async (detail) => {
     setLaporan([]);
-    generateLaporanGakBayar(detail, {
+    generateLaporanUnit(detail, {
       onSuccess: async (data) => {
         const obj = {};
         unit.map((kelas) => {
