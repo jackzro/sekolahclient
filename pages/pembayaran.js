@@ -1,5 +1,5 @@
 import CustomTable from "@components/tablePembayaran/customTable";
-import { pathByUnit, textToJson } from "@helpers/help";
+import { pathByUnit, textToJson, todayTexttoJson } from "@helpers/help";
 import { useUpdateStatusPaymentViaFile } from "@services/student";
 import Head from "next/head";
 import React, { useState, useCallback } from "react";
@@ -32,6 +32,8 @@ function Pembayaran() {
     async (e) => {
       e.preventDefault();
       const text = await readUploadedFileAsText(e.target.files[0]);
+      // const result = todayTexttoJson(text);
+
       const result = textToJson(text);
       await setDatas(result);
     },

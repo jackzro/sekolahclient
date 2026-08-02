@@ -5,7 +5,7 @@ function DropYear({ register }) {
     console.log(e.target.value);
   };
   const getDropList = () => {
-    const year = 2022;
+    const year = 2026;
     return Array.from(new Array(50), (v, i) => (
       <option key={i} value={`${year + i}/${year + i + 1}`}>
         {year + i}/{year + i + 1}

@@ -42,6 +42,9 @@ const postRequest = async (
 };
 
 export const getUangDendaById = (id) => getRequest(`/payments/${id}`);
+export const getGakBayar = () => getRequest(`/payments/cekgakbayar`);
+export const useGetGakBayar = (id) =>
+  useQuery(["gak-bayar", id], () => getGakBayar());
 
 export const useUangDendaById = (id) =>
   useQuery(["uangdenda-by-id", id], () => getUangDendaById(id));

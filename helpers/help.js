@@ -59,6 +59,74 @@ export const textToJson = (text) => {
   });
   return res;
 };
+export const todayTexttoJson = (text) => {
+  const arr = text.split("\n");
+  let res = [];
+  let baru = [];
+  let flag = false;
+  arr.map((data, i) => {
+    if (i > 5) {
+      baru.push(data.trim().split(/\s+/g));
+    }
+  });
+
+  baru.map((datas) => {
+    if (datas[1] === undefined) {
+      return;
+    }
+    let newFormat = {};
+    newFormat.no = datas[0];
+    newFormat.vBcaKode = datas[1].split("-")[1];
+
+    datas.map((data, i) => {
+      if (i === 0 || i === 1) {
+        return;
+      }
+      if (data === "00000") {
+        flag = true;
+        return;
+      }
+      if (data === "IDR") {
+        flag = false;
+        return;
+      }
+      if (flag) {
+        if (newFormat.name === undefined) {
+          newFormat.name = `${data}`;
+          return;
+        } else {
+          newFormat.name += ` ${data}`;
+          return;
+        }
+      }
+      if (newFormat.totalTagihan === undefined) {
+        newFormat.totalTagihan = Number(
+          data.replace(".00", "").replace(/,/g, "")
+        );
+        return;
+      } else if (newFormat.totalPembayaran === undefined) {
+        // newFormat.totalPembayaran = data;
+        newFormat.totalPembayaran = Number(
+          data.replace(".00", "").replace(/,/g, "")
+        );
+        return;
+      } else if (newFormat.tanggalTransaksi === undefined) {
+        let ubahtanggal = data.split("/");
+        newFormat.tanggalTransaksi = `${ubahtanggal[0]}/${ubahtanggal[1]}/${ubahtanggal[2][2]}${ubahtanggal[2][3]}`;
+        return;
+      } else if (newFormat.waktuTransaksi === undefined) {
+        newFormat.waktuTransaksi = data;
+        return;
+      } else if (newFormat.lokasi === undefined) {
+        newFormat.lokasi = data;
+        return;
+      }
+    });
+    res.push(newFormat);
+  });
+  console.log(res);
+  return res;
+};
 
 export const getBulan = (bulan) => {
   switch (bulan) {

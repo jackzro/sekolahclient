@@ -62,6 +62,10 @@ export const updateStatusPayment = (body) =>
 export const laporan = (body) => postRequest(`/students/laporan`, body, false);
 export const laporanUnit = (body) =>
   postRequest(`/students/laporan/unit`, body, false);
+
+export const laporanGakBayar = (body) =>
+  postRequest(`/students/laporan/gakbayar`, body, false);
+
 export const updateStatusPaymentViaFile = (body) =>
   postRequest(`/students/updatePaymentStatusViaFIle`, body, false);
 export const postToGetID = (body) =>
@@ -105,6 +109,8 @@ export const useEditStudent = () => useMutation(postEditStudent);
 export const useUpdateStatusPayment = () => useMutation(updateStatusPayment);
 export const useLaporan = () => useMutation(laporan);
 export const useLaporanUnit = () => useMutation(laporanUnit);
+export const useLaporanGakbayar = () => useMutation(laporanGakBayar);
+
 export const useUpdateStatusPaymentViaFile = () =>
   useMutation(updateStatusPaymentViaFile);
 export const useToGetID = () => useMutation(postToGetID);

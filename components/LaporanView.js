@@ -1,6 +1,10 @@
 import { laporanUnit, typeUnit } from "@helpers/unit";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { useLaporan, useLaporanUnit } from "@services/student";
+import {
+  useLaporan,
+  useLaporanGakbayar,
+  useLaporanUnit,
+} from "@services/student";
 import Laporan from "@components/laporan";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -8,10 +12,12 @@ import { toast } from "react-toastify";
 import { typeFile } from "@helpers/unit";
 import Loading from "./loading";
 import { chooseByUnit } from "@helpers/help";
+import { useGetGakBayar } from "@services/payment";
 
 function LaporanView({ user }) {
   const { mutate: generateLaporan } = useLaporan();
   const { mutate: generateLaporanUnit } = useLaporanUnit();
+  const { mutate: generateLaporanGakBayar } = useLaporanGakbayar();
   const [unit, setUnit] = useState([]);
   const [jenis, setJenis] = useState("");
   const [laporan, setLaporan] = useState([]);
@@ -48,13 +54,12 @@ function LaporanView({ user }) {
 
   const onHandleSubmit = async (detail) => {
     setLaporan([]);
-    generateLaporanUnit(detail, {
+    generateLaporanGakBayar(detail, {
       onSuccess: async (data) => {
         const obj = {};
         unit.map((kelas) => {
           obj[kelas] = [];
         });
-
         data.map((student) => {
           if (obj[student.grade] === undefined) {
             obj[student.grade] = [];
@@ -63,7 +68,6 @@ function LaporanView({ user }) {
             obj[student.grade].push(student);
           }
         });
-
         setLaporan(obj);
         toast("Data sudah di update ke " + jenis + " " + detail.type);
       },
